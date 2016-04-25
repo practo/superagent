@@ -44,4 +44,17 @@ describe('CID tests', function(){
         done();
       });
   });
+
+  it('mutate headers with cid', function() {
+    var heads = {'user-agent': 'browser', 'content-type': 'json'};
+    request.mutateWithCid(heads);
+    assert(!!heads.Cid, 'headers should have cid');
+  });
+
+  it('no change mutation', function() {
+    var heads = {'user-agent': 'browser', 'content-type': 'json', 'cid': '112'};
+    request.mutateWithCid(heads);
+    assert(heads.cid === '112', 'cid should be same');
+  });
+
 });
