@@ -57,4 +57,13 @@ describe('CID tests', function(){
     assert(heads.cid === '112', 'cid should be same');
   });
 
+  it('extract cid from headers', function() {
+    var heads = {'cid': '101a'};
+    assert(request.extractCid(heads) === '101a', 'cid should be same');
+    heads = {'Cid': '101c'};
+    assert(request.extractCid(heads) === '101c', 'Cid should be same');
+    heads = {'user-agent': 'browser'};
+    assert(!!request.extractCid(heads), 'cid should exists');
+  });
+
 });
